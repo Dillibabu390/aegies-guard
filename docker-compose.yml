@@ -1,0 +1,34 @@
+# ==============================================================================
+# AegisGuard AI - Local Docker Compose Setup (Full Stack + MongoDB)
+# ==============================================================================
+
+services:
+  # Main Full-Stack Application (Frontend Dashboard + Simulator + Python AI Orchestrator)
+  aegisguard-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aegisguard-ai
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - MONGO_URI=mongodb://mongodb:27017/fraud_detection_db
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  # MongoDB Master Database
+  mongodb:
+    image: mongo:7.0
+    container_name: aegisguard-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

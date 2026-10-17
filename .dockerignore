@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build Outputs (built fresh inside container stages)
+dist
+simulator/dist
+spring-boot-transaction-audit/target
+
+# Python Bytecode & Environments
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+*.log
+
+# Environment & Secret files
+.env
+.env.*
+!.env.example
+
+# IDE & OS files
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
+# Documentation & Artifacts
+screenshots
+*.bat
+*.ps1

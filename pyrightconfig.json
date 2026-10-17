@@ -1,0 +1,12 @@
+{
+  "include": [
+    "python_orchestrator",
+    "test_system.py"
+  ],
+  "extraPaths": [
+    "python_orchestrator",
+    "C:/Users/Dillibabu/AppData/Local/Programs/Python/Python313/Lib/site-packages"
+  ],
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Windows"
+}

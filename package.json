@@ -1,0 +1,43 @@
+{
+  "name": "multimodal-ai-fraud-detection",
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "spring": "java -jar spring-boot-transaction-audit/target/spring-boot-transaction-audit-1.0.0.jar",
+    "python": "py -m uvicorn main:app --app-dir python_orchestrator --host 127.0.0.1 --port 8000 --reload",
+    "client": "vite --port 5173",
+    "simulator": "vite --config vite.simulator.config.js --port 5174",
+    "build": "vite build",
+    "build:simulator": "vite build --config vite.simulator.config.js",
+    "build:all": "vite build && vite build --config vite.simulator.config.js",
+    "dev": "concurrently \"npm run python\" \"npm run client\" \"npm run simulator\"",
+    "dev:all": "concurrently \"npm run spring\" \"npm run python\" \"npm run client\" \"npm run simulator\""
+  },
+  "dependencies": {
+    "@angular/common": "^21.2.25",
+    "@angular/compiler": "^21.2.25",
+    "@angular/core": "^21.2.25",
+    "@angular/forms": "^21.2.25",
+    "@angular/platform-browser": "^21.2.25",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "golden-layout": "^2.6.0",
+    "react-router-dom": "^7.18.4",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "^0.16.3"
+  },
+  "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.8.0",
+    "@angular-devkit/build-angular": "^21.2.26",
+    "@angular/build": "^21.2.26",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.7"
+  }
+}

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AegisGuard AI • Threat Studio & Transaction Creator [Port 5174]</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/simulator.css" />
+</head>
+<body>
+  <div class="studio-app">
+    <!-- Top Header -->
+    <header class="studio-navbar">
+      <div class="navbar-left">
+        <div class="logo-box">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+          </svg>
+        </div>
+        <div class="title-group">
+          <h1>AegisGuard <span class="gradient-ai">AI</span> Threat Studio</h1>
+          <span class="port-chip">PORT 5174 • TRANSACTION CREATOR</span>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <div class="sync-status-chip">
+          <span class="live-dot"></span>
+          <span>Syncing with Main Dashboard (Port 5173)</span>
+        </div>
+        <div class="orchestrator-status-chip">
+          <span class="pulse-cyan"></span>
+          <span>FastAPI LangGraph (Port 8000)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="studio-main-grid">
+      <!-- Left Column: Attack Vector Presets & Mobile Mockup -->
+      <section class="left-pane">
+        <!-- Attack Presets Section -->
+        <div class="pane-card presets-card">
+          <div class="card-head">
+            <span class="icon">🎯</span>
+            <h2>Threat Attack Scenarios (1-Click Load)</h2>
+          </div>
+          <p class="section-sub">Select any preset vector to automatically inject into creator & mobile simulator:</p>
+          <div class="presets-grid" id="presetsGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Interactive Mobile Phone Simulator Mockup -->
+        <div class="pane-card phone-simulator-card">
+          <div class="card-head">
+            <span class="icon">📱</span>
+            <h2>Client Mobile Banking Simulator</h2>
+            <span class="device-tag">iPhone 15 Pro • Live Mockup</span>
+          </div>
+
+          <div class="phone-frame-wrapper">
+            <div class="phone-mockup">
+              <!-- Dynamic Active Call Banner -->
+              <div class="phone-call-banner" id="phoneCallBanner" style="display: none;">
+                <div class="call-info">
+                  <span class="call-pulse">🟢</span>
+                  <span class="call-text">Active Cellular Call (<span id="phoneCallMins">18.2</span>m)</span>
+                </div>
+                <span class="call-warn">Live Social Engineering</span>
+              </div>
+
+              <!-- Phone Status Bar -->
+              <div class="phone-status-bar">
+                <span>14:32</span>
+                <div class="phone-notch"></div>
+                <span>5G 100%</span>
+              </div>
+
+              <!-- Banking Screen Header -->
+              <div class="phone-screen-header">
+                <span class="bank-brand">AegisPay</span>
+                <span class="user-greeting">Alex Chen</span>
+              </div>
+
+              <!-- Balance Card -->
+              <div class="phone-balance-card">
+                <span class="bal-label">Checking Account Balance</span>
+                <span class="bal-amount">$14,850.00 USD</span>
+                <span class="bal-num">ACC_77189021</span>
+              </div>
+
+              <!-- Transfer Summary Form Preview -->
+              <div class="phone-transfer-preview">
+                <div class="preview-row">
+                  <span class="pr-label">Recipient:</span>
+                  <span class="pr-val" id="phoneRecipientName">Artisan Coffee Co.</span>
+                </div>
+                <div class="preview-row">
+                  <span class="pr-label">Wire Amount:</span>
+                  <span class="pr-val amount" id="phoneAmount">$5.50 USD</span>
+                </div>
+                <div class="preview-row">
+                  <span class="pr-label">Memo:</span>
+                  <span class="pr-val memo" id="phoneMemo">Morning Latte & Bagel</span>
+                </div>
+              </div>
+
+              <!-- Real-Time Camera Selfie Capture at TXN Time -->
+              <div class="phone-cam-capture-card">
+                <div class="cam-card-header">
+                  <div class="cam-title-left">
+                    <span class="cam-icon">📸</span>
+                    <span class="cam-title">Selfie at TXN Time</span>
+                  </div>
+                  <span class="cam-status-badge" id="phoneCamBadge">Captured at TXN</span>
+                </div>
+
+                <div class="cam-viewfinder-box">
+                  <video id="phoneCamVideo" autoplay playsinline muted style="display: none;"></video>
+                  <img id="phoneCamPreview" src="/assets/selfie_alex_match.jpg" alt="Captured Face" />
+                  <div class="cam-face-oval"></div>
+                  <span class="cam-timestamp-tag" id="phoneCamTimestamp">Live Edge Capture</span>
+                </div>
+
+                <div class="cam-controls-row">
+                  <button type="button" class="cam-btn live-btn" id="phoneOpenCamBtn" title="Open webcam stream">
+                    <span>🎥 Live Cam</span>
+                  </button>
+                  <button type="button" class="cam-btn snap-btn" id="phoneSnapBtn" style="display: none;" title="Capture snapshot right now">
+                    <span>📸 Snap</span>
+                  </button>
+                  <label class="cam-btn upload-btn" title="Upload selfie image">
+                    <span>📁 Photo</span>
+                    <input type="file" id="phoneUploadInput" accept="image/*" style="display: none;" />
+                  </label>
+                  <button type="button" class="cam-btn retake-btn" id="phoneRetakeBtn" style="display: none;" title="Retake photo">
+                    <span>🔄 Retake</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Phone Action Button -->
+              <div class="phone-action-area">
+                <button class="phone-submit-btn" id="phoneSubmitBtn">
+                  <span>Authorize & Send Wire</span>
+                  <span class="arrow">➔</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Granular Transaction Configurator Form -->
+      <section class="right-pane">
+        <div class="pane-card form-card">
+          <div class="card-head">
+            <span class="icon">⚙️</span>
+            <h2>Custom Transaction Configurator</h2>
+            <button class="reset-btn" id="resetBtn">🔄 Reset All</button>
+          </div>
+
+          <!-- Parameter Tabs -->
+          <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-core">💳 1. Payment Core</button>
+            <button class="tab-btn" data-tab="tab-telemetry">📡 2. Telemetry & Geo</button>
+            <button class="tab-btn" data-tab="tab-biometric">🛡️ 3. Biometrics</button>
+            <button class="tab-btn" data-tab="tab-audit">🔍 4. Security Audit</button>
+            <button class="tab-btn" data-tab="tab-scam">🚨 5. Scam & Sensors</button>
+          </div>
+
+          <!-- Tab 1: Payment Core -->
+          <div class="tab-pane active" id="tab-core">
+            <div class="form-row">
+              <div class="form-group">
+                <label>User Account</label>
+                <select id="fieldUser">
+                  <option value="usr_alex_chen">Alex Chen (ACC_77189021 • $14,850.00)</option>
+                  <option value="usr_sarah_connor">Sarah Connor (ACC_99810212 • $42,500.00)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Amount ($)</label>
+                <input type="number" id="fieldAmount" value="14500.00" step="0.50" min="0.01" />
+              </div>
+              <div class="form-group">
+                <label>Currency</label>
+                <select id="fieldCurrency">
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>Beneficiary / Payee Name</label>
+                <input type="text" id="fieldBeneficiaryName" value="Reserve Safe Haven Escrow (Unverified)" />
+              </div>
+              <div class="form-group flex-2">
+                <label>Beneficiary Account Number</label>
+                <input type="text" id="fieldBeneficiaryAccount" value="ACC_UNVERIFIED_VAULT_99" />
+              </div>
+              <div class="form-group checkbox-group">
+                <label class="switch-lbl">
+                  <input type="checkbox" id="fieldNewBeneficiary" checked />
+                  <span>First-Time Payee</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Payment Memo / Narration (Scam Psychology Analysis)</label>
+              <input type="text" id="fieldMemo" value="SAFE HOLDING RECOVERY VAULT - CLEARANCE" />
+              <div class="quick-memos">
+                <span class="qm-hint">Quick inject:</span>
+                <button type="button" class="qm-tag" data-memo="Morning Latte & Bagel">☕ Coffee</button>
+                <button type="button" class="qm-tag" data-memo="SAFE HOLDING RECOVERY VAULT - CLEARANCE">🚨 Police Safe Haven</button>
+                <button type="button" class="qm-tag" data-memo="APEX-YIELD VIP USDT ALLOCATION 450% GUARANTEED">💰 Crypto 450% ROI</button>
+                <button type="button" class="qm-tag" data-memo="IRS Urgent Tax Clearance Settlement">⚖️ Tax Settlement</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: Telemetry & Geo -->
+          <div class="tab-pane" id="tab-telemetry">
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>Originating Geolocation</label>
+                <select id="fieldGeoPreset">
+                  <option value="london">London, UK (9,540 km jump from Taipei)</option>
+                  <option value="taipei">Taipei, Taiwan (User Normal Home City)</option>
+                  <option value="sf">San Francisco, USA (10,400 km jump)</option>
+                  <option value="tokyo">Tokyo, Japan (2,100 km jump)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Prior Activity Mins Ago</label>
+                <input type="number" id="fieldElapsedMins" value="25" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>Device Fingerprint & Model</label>
+                <select id="fieldDeviceModel">
+                  <option value="Apple iPhone 15 Pro (Known)">Apple iPhone 15 Pro (Trusted Hardware)</option>
+                  <option value="Android Generic Emulator x86">Android Generic Emulator (Untrusted)</option>
+                  <option value="Unrecognized Kali Linux Device">Kali Linux Attacker Environment</option>
+                </select>
+              </div>
+              <div class="form-group checkbox-group">
+                <label class="switch-lbl">
+                  <input type="checkbox" id="fieldRooted" />
+                  <span>Rooted / Jailbroken</span>
+                </label>
+              </div>
+              <div class="form-group checkbox-group">
+                <label class="switch-lbl">
+                  <input type="checkbox" id="fieldVpn" checked />
+                  <span>VPN / Proxy IP Active</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Biometrics -->
+          <div class="tab-pane" id="tab-biometric">
+            <!-- Camera Capture at TXN Time Control Studio -->
+            <div class="camera-capture-studio-card">
+              <div class="cc-header">
+                <div class="cc-title-group">
+                  <span class="cc-icon">📸</span>
+                  <div class="cc-text">
+                    <strong>Capture Live Image at Transaction Execution Time</strong>
+                    <small>Real-time edge camera feed ingested by Agent 3 Multimodal Vision</small>
+                  </div>
+                </div>
+                <span class="cc-badge" id="studioCamBadge">Captured at TXN</span>
+              </div>
+
+              <div class="cc-body">
+                <div class="cc-preview-wrap">
+                  <video id="studioCamVideo" autoplay playsinline muted style="display: none;"></video>
+                  <img id="studioCamPreview" src="/assets/selfie_alex_match.jpg" alt="Active Transaction Face" />
+                  <canvas id="hiddenCaptureCanvas" style="display: none;"></canvas>
+                  <div class="cc-target-grid"></div>
+                </div>
+
+                <div class="cc-actions-col">
+                  <div class="cc-buttons-row">
+                    <button type="button" class="cc-btn primary" id="studioOpenCamBtn">
+                      <span>🎥 Open Webcam Feed</span>
+                    </button>
+                    <button type="button" class="cc-btn snap" id="studioSnapBtn" style="display: none;">
+                      <span>📸 Capture Photo Now</span>
+                    </button>
+                    <label class="cc-btn secondary">
+                      <span>📁 Upload Captured Image</span>
+                      <input type="file" id="studioUploadInput" accept="image/*" style="display: none;" />
+                    </label>
+                    <button type="button" class="cc-btn outline" id="studioResetCamBtn">
+                      <span>🔄 Reset to Baseline</span>
+                    </button>
+                  </div>
+                  <div class="cc-meta-row">
+                    <div class="meta-tag">
+                      <span class="m-lbl">CAPTURE STATUS:</span>
+                      <span class="m-val highlight" id="ccMetaStatus">Captured at TXN Time</span>
+                    </div>
+                    <div class="meta-tag">
+                      <span class="m-lbl">SIMILARITY:</span>
+                      <span class="m-val" id="ccMetaMatch">96.8% Facial Cosine</span>
+                    </div>
+                    <div class="meta-tag">
+                      <span class="m-lbl">LIVENESS:</span>
+                      <span class="m-val" id="ccMetaLiveness">Active 3D Pulse Verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>Presented Selfie Biometric Stream</label>
+                <select id="fieldSelfieType">
+                  <option value="verified_live">🟢 Verified Live Biological Selfie (96.8% match)</option>
+                  <option value="unmatched_face">🔴 Face Mismatch (18.4% match vs KYC ID)</option>
+                  <option value="deepfake_replay">🔴 Screen Replay / Deepfake Synthetic Video</option>
+                  <option value="spoof_mask">🔴 Physical 3D Printed Mask Presentation</option>
+                  <option value="skipped">🔴 Biometric Challenge Skipped / Bypassed</option>
+                </select>
+              </div>
+              <div class="form-group flex-2">
+                <label>Government ID Document Inspection</label>
+                <select id="fieldDocType">
+                  <option value="authentic_id">🟢 Authentic ID (Valid Hologram & MRZ)</option>
+                  <option value="tampered_id">🔴 Tampered Document (Digital Font Alteration)</option>
+                  <option value="mismatched_name">🔴 Name Mismatch on ID Document</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="switch-lbl">
+                <input type="checkbox" id="fieldGlare" />
+                <span>Specular Display Glare / Lens Blur Detected</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Tab 4: Security Audit -->
+          <div class="tab-pane" id="tab-audit">
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>MPIN & Password Reset Recency</label>
+                <select id="fieldMpinReset">
+                  <option value="2h">🚨 Reset 2 Hours Ago (Critical ATO Window)</option>
+                  <option value="24h">⚠️ Reset 24 Hours Ago (Elevated Friction)</option>
+                  <option value="none">🟢 Clean (No Recent Credential Changes)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Failed Logins in Past 24h</label>
+                <input type="number" id="fieldFailedLogins" value="4" min="0" max="10" />
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="switch-lbl">
+                <input type="checkbox" id="fieldSimSwap" />
+                <span>Telco Carrier SIM Swap Reported in Last 48h</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Tab 5: Scam & Sensors -->
+          <div class="tab-pane" id="tab-scam">
+            <div class="form-row">
+              <div class="form-group checkbox-group flex-2">
+                <label class="switch-lbl">
+                  <input type="checkbox" id="fieldActiveCall" checked />
+                  <span>Active Concurrent Cellular / VoIP Call During Transfer</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Call Duration (Minutes)</label>
+                <input type="number" id="fieldCallDuration" value="18.2" step="0.5" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group checkbox-group flex-2">
+                <label class="switch-lbl">
+                  <input type="checkbox" id="fieldClipboardPasted" checked />
+                  <span>Destination Account Pasted Directly from Clipboard</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Input Dwell Time (Seconds)</label>
+                <input type="number" id="fieldClipboardDwell" value="1.4" step="0.1" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Dispatch Control Bar -->
+          <div class="dispatch-actions-bar">
+            <button class="dispatch-btn swarm-btn" id="dispatchSwarmBtn">
+              <span class="btn-icon">🚀</span>
+              <span class="btn-text">
+                <strong>Dispatch Full AI Evaluation</strong>
+                <small>LangGraph 5-Agent Swarm (Google Gemini 3.8 Flash)</small>
+              </span>
+            </button>
+
+            <button class="dispatch-btn realtime-btn" id="dispatchFastGateBtn">
+              <span class="btn-icon">⚡</span>
+              <span class="btn-text">
+                <strong>Instant Real-Time Gate</strong>
+                <small>Deterministic Edge SLA &lt;50ms</small>
+              </span>
+            </button>
+          </div>
+
+          <!-- Live Result Output Card -->
+          <div class="result-card" id="resultCard" style="display: none;">
+            <div class="result-header">
+              <span class="res-title">Execution Result Dossier</span>
+              <span class="sync-confirm-badge">🟢 Synchronized to Port 5173</span>
+            </div>
+
+            <div class="result-body">
+              <div class="res-metric-item">
+                <span class="lbl">Transaction ID:</span>
+                <span class="val highlight" id="resTxnId">TXN-000000</span>
+              </div>
+              <div class="res-metric-item">
+                <span class="lbl">Total Risk Score:</span>
+                <span class="val score" id="resScore">0 / 100</span>
+              </div>
+              <div class="res-metric-item">
+                <span class="lbl">Decision Verdict:</span>
+                <span class="verdict-pill" id="resDecision">APPROVE</span>
+              </div>
+              <div class="res-metric-item">
+                <span class="lbl">Pipeline Latency:</span>
+                <span class="val" id="resLatency">0ms</span>
+              </div>
+            </div>
+
+            <div class="res-action-note" id="resAction">
+              Action text here
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/simulator.js"></script>
+</body>
+</html>
